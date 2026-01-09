@@ -1,7 +1,5 @@
 package com.bank.mybank.controller;
 
-import java.util.List;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,7 +7,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bank.mybank.dto.DeptRequestDTO;
 import com.bank.mybank.entity.Department;
+import com.bank.mybank.response.ApiResponse;
 import com.bank.mybank.service.DeptService;
 
 @RestController
@@ -22,18 +22,27 @@ public class DeptController {
         this.deptService = deptService;
     }
 
-    @GetMapping("/{deptNo}")
-    public Department getDeptById(@PathVariable Long deptNo) {
-        return deptService.getDeptById(deptNo);
-    }
+    @PostMapping
+    public ApiResponse<Department> createDepartment(@RequestBody DeptRequestDTO dto) {
+    	
+    	Department dept = deptService.createDept(dto);
 
-    @GetMapping("/")
-    public List<Department> getAllDepartments() {
-        return deptService.getAllDepartments();
+        return new ApiResponse<>(
+                true,
+                "Department created successfully",
+                dept
+        );
     }
     
-    @PostMapping("/add")
-    public Department addDept(@RequestBody Department dept) {
-        return deptService.addDept(dept);
+    @GetMapping("/{deptNo}")
+    public ApiResponse<Department> getDepartment(@PathVariable Long deptNo) {
+
+    	Department dept = deptService.getDeptById(deptNo);
+
+        return new ApiResponse<>(
+                true,
+                "Department fetched successfully",
+                dept
+        );
     }
 }

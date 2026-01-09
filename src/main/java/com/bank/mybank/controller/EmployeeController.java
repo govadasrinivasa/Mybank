@@ -1,12 +1,17 @@
 package com.bank.mybank.controller;
 
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import com.bank.mybank.dto.EmployeeRequestDTO;
 import com.bank.mybank.entity.Department;
 import com.bank.mybank.entity.EmployeeDeptFK;
+import com.bank.mybank.response.ApiResponse;
 import com.bank.mybank.service.EmployeeService;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/emp")
@@ -18,32 +23,27 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    @PostMapping("/add")
-    public EmployeeDeptFK addDept(@RequestBody EmployeeDeptFK emp) {
-        return employeeService.addEmployee(emp);
-    }
-    
-    @GetMapping("/{id}")
-    public EmployeeDeptFK getEmployeeById(@PathVariable Integer id) {
-        return employeeService.getEmployeeById(id);
+    @PostMapping
+    public ApiResponse<EmployeeDeptFK> createEmployee(
+            @RequestBody EmployeeRequestDTO dto) {
+    	EmployeeDeptFK employee = employeeService.createEmployee(dto);
+
+        return new ApiResponse<>(
+                true,
+                "Employee created successfully",
+                employee
+        );
     }
 
-    @GetMapping("/by-dept-no/{deptNo}")
-    public List<EmployeeDeptFK> getEmployeesByDeptNo(
-            @PathVariable Integer deptNo) {
-        return employeeService.getEmployeesByDeptNo(deptNo);
-    }
-
-    // Get employees by department name
-    @GetMapping("/by-dept-name/{deptName}")
-    public List<EmployeeDeptFK> getEmployeesByDeptName(
-            @PathVariable String deptName) {
-        return employeeService.getEmployeesByDeptName(deptName);
-    }
-
-    // Get department details of an employee
     @GetMapping("/{id}/department")
-    public Department getDepartmentOfEmployee(@PathVariable Integer id) {
-        return employeeService.getDepartmentByEmployeeId(id);
+    public ApiResponse<Department> getEmployeeDepartment(@PathVariable Integer id) {
+    	
+    	Department dept = employeeService.getDepartmentByEmployeeId(id);
+    	
+    	return new ApiResponse<>(
+                true,
+                "Department fetched successfully",
+                dept
+        );
     }
 }
