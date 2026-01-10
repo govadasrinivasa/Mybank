@@ -5,7 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.bank.mybank.dto.EmployeeRequestDTO;
 import com.bank.mybank.entity.Department;
-import com.bank.mybank.entity.EmployeeDeptFK;
+import com.bank.mybank.entity.Employee;
 import com.bank.mybank.exception.ResourceNotFoundException;
 import com.bank.mybank.mapper.EmployeeMapper;
 import com.bank.mybank.repository.DeptRepository;
@@ -25,21 +25,19 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public EmployeeDeptFK createEmployee(EmployeeRequestDTO dto) {
+    public Employee createEmployee(EmployeeRequestDTO dto) {
 
         Department dept = deptRepo.findById(dto.getDeptNo())
                 .orElseThrow(() -> new ResourceNotFoundException("Department not found with deptNo: " 
-                			+ dto.getDeptNo()
-                        ));
+                			+ dto.getDeptNo()));
 
-        EmployeeDeptFK employee =
-                EmployeeMapper.toEntity(dto, dept);
+        Employee employee = EmployeeMapper.toEntity(dto, dept);
 
         return employeeRepo.save(employee);
     }
 
     @Override
-    public EmployeeDeptFK getEmployeeById(Integer empId) {
+    public Employee getEmployeeById(Long empId) {
         return employeeRepo.findById(empId)
                 .orElseThrow(() -> new ResourceNotFoundException(
                         "Employee not found with empId: " + empId
@@ -47,7 +45,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Department getDepartmentByEmployeeId(Integer empId) {
+    public Department getDepartmentByEmployeeId(Long empId) {
         return getEmployeeById(empId).getDept();
     }
 }

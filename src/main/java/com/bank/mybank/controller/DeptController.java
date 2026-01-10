@@ -27,11 +27,7 @@ public class DeptController {
     	
     	Department dept = deptService.createDept(dto);
 
-        return new ApiResponse<>(
-                true,
-                "Department created successfully",
-                dept
-        );
+        return new ApiResponse<>(true, "Department created successfully", dept);
     }
     
     @GetMapping("/{deptNo}")
@@ -39,10 +35,6 @@ public class DeptController {
 
     	Department dept = deptService.getDeptById(deptNo);
 
-        return new ApiResponse<>(
-                true,
-                "Department fetched successfully",
-                dept
-        );
+        return new ApiResponse<>(true,"Department fetched successfully", dept);
     }
 }

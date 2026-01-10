@@ -2,14 +2,14 @@ package com.bank.mybank.mapper;
 
 import com.bank.mybank.dto.EmployeeRequestDTO;
 import com.bank.mybank.entity.Department;
-import com.bank.mybank.entity.EmployeeDeptFK;
+import com.bank.mybank.entity.Employee;
 
 public class EmployeeMapper {
 
-    public static EmployeeDeptFK toEntity(
+    public static Employee toEntity(
             EmployeeRequestDTO dto, Department dept) {
 
-        EmployeeDeptFK emp = new EmployeeDeptFK();
+        Employee emp = new Employee();
         emp.setEmpId(dto.getEmpId());
         emp.setFirstName(dto.getFirstName());
         emp.setLastName(dto.getLastName());

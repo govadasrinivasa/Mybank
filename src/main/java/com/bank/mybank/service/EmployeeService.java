@@ -2,13 +2,13 @@ package com.bank.mybank.service;
 
 import com.bank.mybank.dto.EmployeeRequestDTO;
 import com.bank.mybank.entity.Department;
-import com.bank.mybank.entity.EmployeeDeptFK;
+import com.bank.mybank.entity.Employee;
 
 public interface EmployeeService {
 
-	EmployeeDeptFK createEmployee(EmployeeRequestDTO dto);
+	Employee createEmployee(EmployeeRequestDTO dto);
 
-    EmployeeDeptFK getEmployeeById(Integer empId);
+    Employee getEmployeeById(Long empId);
 
-    Department getDepartmentByEmployeeId(Integer empId);
+    Department getDepartmentByEmployeeId(Long empId);
 }

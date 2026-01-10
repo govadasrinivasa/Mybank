@@ -4,6 +4,7 @@ public class DeptRequestDTO {
 
 	private Long deptNo;
     private String deptName;
+    private String location;
     
 	public Long getDeptNo() {
 		return deptNo;
@@ -16,6 +17,12 @@ public class DeptRequestDTO {
 	}
 	public void setDeptName(String deptName) {
 		this.deptName = deptName;
+	}
+	public String getLocation() {
+		return location;
+	}
+	public void setLocation(String location) {
+		this.location = location;
 	}
     
 }

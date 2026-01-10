@@ -9,6 +9,7 @@ public class DeptMapper {
 		Department dept = new Department();
         dept.setDeptNo(dto.getDeptNo());
         dept.setName(dto.getDeptName());
+        dept.setLocation(dto.getLocation());
         return dept;
     }
 }

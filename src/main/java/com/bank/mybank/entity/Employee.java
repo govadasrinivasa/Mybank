@@ -5,29 +5,29 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "Employee")
-public class EmployeeDeptFK {
+@Table(name = "employee")
+public class Employee {
 
     @Id
-    @Column(name = "EmpId")
+    @Column(name = "emp_id")
     private Long empId;
 
-    @Column(name = "FirstName")
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name = "LastName")
+    @Column(name = "last_name")
     private String lastName;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "DeptNo", referencedColumnName = "DeptNo")
-    private Department dept;
-
-    @Column(name = "Salary")
-    private BigDecimal salary;
-
-    @Column(name = "HireDate")
+    @Column(name = "hire_date")
     private LocalDate hireDate;
 
+    @Column(name = "salary")
+    private BigDecimal salary;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "dept_no")
+    private Department dept;
+    
 	public Long getEmpId() {
 		return empId;
 	}

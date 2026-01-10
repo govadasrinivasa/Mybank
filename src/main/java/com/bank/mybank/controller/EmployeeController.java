@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bank.mybank.dto.EmployeeRequestDTO;
 import com.bank.mybank.entity.Department;
-import com.bank.mybank.entity.EmployeeDeptFK;
+import com.bank.mybank.entity.Employee;
 import com.bank.mybank.response.ApiResponse;
 import com.bank.mybank.service.EmployeeService;
 
@@ -24,9 +24,8 @@ public class EmployeeController {
     }
 
     @PostMapping
-    public ApiResponse<EmployeeDeptFK> createEmployee(
-            @RequestBody EmployeeRequestDTO dto) {
-    	EmployeeDeptFK employee = employeeService.createEmployee(dto);
+    public ApiResponse<Employee> createEmployee(@RequestBody EmployeeRequestDTO dto) {
+    	Employee employee = employeeService.createEmployee(dto);
 
         return new ApiResponse<>(
                 true,
@@ -36,7 +35,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/{id}/department")
-    public ApiResponse<Department> getEmployeeDepartment(@PathVariable Integer id) {
+    public ApiResponse<Department> getEmployeeDepartment(@PathVariable Long id) {
     	
     	Department dept = employeeService.getDepartmentByEmployeeId(id);
     	

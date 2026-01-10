@@ -1,17 +1,17 @@
 package com.bank.mybank.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-
-import com.bank.mybank.entity.EmployeeDeptFK;
-
 import java.util.List;
 
-public interface EmployeeDeptFKRepository extends JpaRepository<EmployeeDeptFK, Integer> {
+import org.springframework.data.jpa.repository.JpaRepository;
 
-    List<EmployeeDeptFK> findByDept_DeptNo(Integer deptNo);
+import com.bank.mybank.entity.Employee;
 
-    List<EmployeeDeptFK> findByDept_Name(String deptName);
+public interface EmployeeDeptFKRepository extends JpaRepository<Employee, Long> {
 
-    List<EmployeeDeptFK> findBySalaryBetween(Double minSalary, Double maxSalary);
+    List<Employee> findByDept_DeptNo(Integer deptNo);
+
+    List<Employee> findByDept_Name(String deptName);
+
+    List<Employee> findBySalaryBetween(Double minSalary, Double maxSalary);
 }
 
